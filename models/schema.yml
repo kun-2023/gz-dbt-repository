@@ -1,0 +1,20 @@
+version: 2
+sources:
+  - name: raw_bigquery_data
+    database: My First Project
+    schema: gz_raw_data
+    loader: bigquery
+    tables:
+    - name: product
+      identifier: raw_gz_product
+      description: table details products
+      columns:
+      - name: product_id
+        description: Primary_Key
+        tests:
+        - unique
+    - name: sales
+      identifier: raw_gz_sales
+      description: table tracks sales
+    - name: ship
+      identifier: raw_gz_ship
