@@ -1,8 +1,8 @@
 version: 2
 sources:
-  - name: raw_bigquery_data
-    database: My First Project
-    schema: gz_raw_data
+  - name: gz_raw_data
+    # database: My_First_Project
+    # schema: gz_raw_data
     loader: bigquery
     tables:
     - name: product
