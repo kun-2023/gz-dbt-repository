@@ -16,5 +16,9 @@ sources:
     - name: sales
       identifier: raw_gz_sales
       description: table tracks sales
+      loaded_at_field: date_date
+      columns:
+        - name: date_date
+          description: date_of_purchase
     - name: ship
       identifier: raw_gz_ship
