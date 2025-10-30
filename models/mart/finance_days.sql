@@ -1,28 +1,16 @@
-with a as
-(select 
-s.date_date,-- Date
-count(distinct s.orders_id) as nb_transactions, -- Total number of transactions
-sum(s.revenue) as revenue,-- Total revenue
-sum(s.revenue)/count(distinct s.orders_id) as avg_basket,-- Average Basket
-sum(s.purchase_cost) as purchase_cost --Total Purchase Cost
-from {{ref("int_sales_margin")}} s
-group by date_date),
-b as(select 
-m.date_date,
-sum(o.operational_margin) as Operational_margin,-- Operational Margin
-sum(o.shipping_fee) as shipping_cost,-- Total shipping fees
-sum(logcost) as log_cost,-- Total log costs
-sum(m.quantity) as total_quantity-- Total quantity of products sold.
-from 
-{{ref("int_orders_margin")}} m
-left join 
-{{ref("int_orders_operational")}} o
-using(orders_id)
-group by m.date_date
-)
-select a.date_date, a.nb_transactions, a.revenue, a.avg_basket,a.purchase_cost,b.Operational_margin,b.shipping_cost,
-b.log_cost,b.total_quantity
-from
-a left join b using(date_date)
-left join 
-group by a.date_date;
+with a as(
+    select date_date,
+    count(distinct orders_id) as nb_transactions,
+    round(sum(revenue),0) as revenue,
+    round(sum(margin),0) as margin,
+    round(sum(operational_margin),0) as operational_margin,
+    round(sum(purchase_cost),0) as purchase_cost,
+    round(sum(shipping_cost)) as shipping_cost,
+    round(sum(logcost)) as log_cost,
+    round(sum(ship_cost),0) as ship_cost,
+    sum(quantity) as quantity
+    from {{ref("int_orders_operational")}}
+    group by date_date)
+select *,
+revenue/nullif(nb_transactions) as avg_basket
+from asorder by date_date desc;
