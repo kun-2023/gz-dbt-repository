@@ -1,13 +1,13 @@
-name: "dbt_kun"
+name: "dbt_demo"
 version: '1.0.0'
 config-version: 2
 profile: 'default'
 
 models:
-  dbt_kun:
+  dbt_demo:
     staging:
       +materialized: view
     intermediate:
       +materialized: view
     marts:
-      +materialzed: table
+      +materialized: table
