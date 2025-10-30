@@ -1,0 +1,36 @@
+version: 2
+sources:
+  - name: gz_raw_data
+    # database: My_First_Project
+    # schema: gz_raw_data
+    loader: bigquery
+    tables:
+    - name: product
+      identifier: raw_gz_product
+      description: table details products
+      columns:
+      - name: products_id
+        description: Primary_Key
+        tests:
+          - unique
+
+    - name: sales
+      identifier: raw_gz_sales
+      description: table tracks sales
+      loaded_at_field: date_date
+      columns:
+        - name: date_date
+          description: date_of_purchase
+        - name: orders_id
+          description: date of purchase
+        - name: pdt_id
+          description: foreign key to product
+      tests:
+        - unique:
+            column_name: "(orders_id || '-' || pdt_id)"
+
+    - name: ship
+      identifier: raw_gz_ship
+      
+       
+
