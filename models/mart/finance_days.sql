@@ -1,9 +1,9 @@
 with a as
 (select 
 s.date_date,-- Date
-count(s.orders_id) as nb_transactions -- Total number of transactions
+count(distinct s.orders_id) as nb_transactions -- Total number of transactions
 sum(s.revenue) as revenue-- Total revenue
-sum(s.quantity)/count(distinct orders_id) as avg_basket-- Average Basket
+sum(s.revenue)/count(distinct s.orders_id) as avg_basket-- Average Basket
 sum(s.purchase_cost) as purchase_cost --Total Purchase Cost
 from {{ref("int_sales_margin")}} s
 group by date_date),
