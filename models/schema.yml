@@ -9,10 +9,11 @@ sources:
       identifier: raw_gz_product
       description: table details products
       columns:
-      - name: product_id
+      - name: products_id
         description: Primary_Key
         tests:
-        - unique
+          - unique
+
     - name: sales
       identifier: raw_gz_sales
       description: table tracks sales
@@ -20,5 +21,16 @@ sources:
       columns:
         - name: date_date
           description: date_of_purchase
+        - name: orders_id
+          description: date of purchase
+        - name: pdt_id
+          description: foreign key to product
+      tests:
+        - unique:
+            column_name: "(orders_id || '-' || pdt_id)"
+
     - name: ship
       identifier: raw_gz_ship
+      
+       
+
