@@ -11,7 +11,17 @@ with a as(
     sum(quantity) as quantity
     from {{ref("int_orders_operational")}}
     group by date_date)
-select *,
+select
+date_date,
+nb_transactions,
+revenue,
+margin,
+operational_margin,
+purchase_cost,
+ship_cost,
+log_cost,
+shipping_fee,
+quantity,
 revenue/nullif(nb_transactions,0) as avg_basket
 from a
 order by date_date desc;
