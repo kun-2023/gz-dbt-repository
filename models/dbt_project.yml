@@ -1,0 +1,13 @@
+name: "dbt_kun"
+version: '1.0.0'
+config-version: 2
+profile: 'default'
+
+models:
+  dbt_kun:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialzed: table
